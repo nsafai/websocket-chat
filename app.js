@@ -7,10 +7,16 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var http = require('http');
 var app = express();
 //Socket.io has to use the http server
-const server = require('http').Server(app);
+var server = http.createServer(app);
 
+//Socket.io
+var io = require('socket.io').listen(server);
+io.on("connection", (socket) => {
+  console.log("🔌 New user connected! 🔌");
+})
 
 //Express View Engine for Handlebars
 const exphbs  = require('express-handlebars');
@@ -45,5 +51,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var port = process.env.PORT || '3000';
+app.set('port', port);
+
+server.listen(app.get('port'));
+// server.listen(port, () => {
+//   console.log('Server listening on Port 3000');
+// })
 
 module.exports = app;
