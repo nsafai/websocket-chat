@@ -15,7 +15,8 @@ var server = http.createServer(app);
 //Socket.io
 var io = require('socket.io').listen(server);
 io.on("connection", (socket) => {
-  console.log("🔌 New user connected! 🔌");
+  require('./sockets/chat.js')(io, socket); 
+  // find socket listeners in sockets/chat.js
 })
 
 //Express View Engine for Handlebars
