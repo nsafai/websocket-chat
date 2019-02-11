@@ -1,4 +1,5 @@
 # Web Chat client using socket.io
+This single page web app is a chat client. It is a learning project as part of Make School's BEW 2.1 Advanced Web Patterns class.
 
 ## Milestones
 - [ ] Upon entering the application, I can choose a username to go by.
