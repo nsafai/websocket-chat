@@ -1,32 +1,33 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+/* eslint-disable prefer-const */
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const http = require('http');
 
-var http = require('http');
-var app = express();
-//Socket.io has to use the http server
-var server = http.createServer(app);
+const app = express();
+// Socket.io has to use the http server
+const server = http.createServer(app);
+let onlineUsers = {};
 
-//Socket.io
-var io = require('socket.io').listen(server);
-io.on("connection", (socket) => {
-  require('./sockets/chat.js')(io, socket); 
+// Socket.io
+let io = require('socket.io').listen(server);
+
+io.on('connection', (socket) => {
+  // eslint-disable-next-line global-require
+  require('./sockets/chat.js')(io, socket, onlineUsers);
   // find socket listeners in sockets/chat.js
-})
+});
 
-//Express View Engine for Handlebars
-const exphbs  = require('express-handlebars');
+// Express View Engine for Handlebars
+const exphbs = require('express-handlebars');
+const usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'hbs');
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,12 +39,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -53,12 +55,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var port = process.env.PORT || '3000';
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 server.listen(app.get('port'));
-// server.listen(port, () => {
-//   console.log('Server listening on Port 3000');
-// })
 
 module.exports = app;
