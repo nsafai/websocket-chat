@@ -9,11 +9,10 @@ module.exports = (io, socket, onlineUsers) => {
   // Listen for "new user" socket emits
   socket.on('new user', (username) => {
     // Save the username as key to access the user's socket id
-    console.log(onlineUsers);
     onlineUsers[username] = socket.id;
     console.log(onlineUsers);
     // Save the username to socket as well. This is important for later.
-    socket['username'] = username;
+    socket.username = username;
     console.log(`✋ ${username} has joined the chat! ✋`);
     // Send the username to all clients currently connected
     io.emit('new user', username);
@@ -29,7 +28,7 @@ module.exports = (io, socket, onlineUsers) => {
   socket.on('get online users', () => {
     // Send over the onlineUsers
     console.log('inside get online users function: ', onlineUsers);
-    io.emit('get online users', onlineUsers);
+    socket.emit('get online users', onlineUsers);
     // io.emit('get online users', onlineUsers);
   });
 };
