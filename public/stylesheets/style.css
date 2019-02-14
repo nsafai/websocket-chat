@@ -112,6 +112,7 @@ a {
   width: 80%;
   border: solid 1px var(--mid-grey);
   background-color: var(--dark-grey);
+  color: var(--off-white);
 }
 
 #newChannelBtn {
