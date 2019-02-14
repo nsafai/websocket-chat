@@ -11,13 +11,15 @@ const app = express();
 // Socket.io has to use the http server
 const server = http.createServer(app);
 let onlineUsers = {};
+// Save the channels in this object.
+let channels = { 'General' : [] };
 
 // Socket.io
 let io = require('socket.io').listen(server);
 
 io.on('connection', (socket) => {
   // eslint-disable-next-line global-require
-  require('./sockets/chat.js')(io, socket, onlineUsers);
+  require('./sockets/chat.js')(io, socket, onlineUsers, channels);
   // find socket listeners in sockets/chat.js
 });
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 // chat.js
-module.exports = (io, socket, onlineUsers) => {
+module.exports = (io, socket, onlineUsers, channels) => {
   // Future socket listeners will be here
   const newLocal = '🔌 New user connected! 🔌';
   console.log(newLocal);
@@ -49,5 +49,16 @@ module.exports = (io, socket, onlineUsers) => {
   // Create new channel
   socket.on('new channel', (newChannel) => {
     console.log('creating new channel:', newChannel);
+    // Save the new channel to our channels object. The array will hold the messages.
+    channels[newChannel] = [];
+    // Have the socket join the new channel room.
+    socket.join(newChannel);
+    // Inform all clients of the new channel.
+    io.emit('new channel', newChannel);
+    // Emit to the client that made the new channel, to change their channel to the one they made.
+    socket.emit('user changed channel', {
+      channel: newChannel,
+      messages: channels[newChannel],
+    });
   });
 };

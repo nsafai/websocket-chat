@@ -139,6 +139,7 @@ a {
   font-size: 1em;
   color: white;
   background-color: var(--pink);
+  margin-bottom: 0.25em;
 }
 
 .brand {
