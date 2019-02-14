@@ -1,23 +1,32 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
 <form class="usernameForm">
-  <input id="usernameInput" placeholder="Username"></input>
-  <button id="createUserBtn">Join Chat</button>
+  <h1 class="pageTitle">{{title}}</h1>
+  <p class="pageSubtitle">Enter your name below to join {{title}}</p>
+  <div class="joinChatForm">
+    <input id="usernameInput" placeholder="Username"></input>
+  <button id="createUserBtn">Join</button>
+  </div>
 </form>
 
 <div class="mainContainer">
-  <div class="channelsAndUsersOnlineContainer">
-    <h1 class="brand">Make Chat</h1>
+  <div class="leftPane">
+    <h1 class="brand">{{title}}</h1>
     <div class="channels">
         <h2 class="channelsLabel">Channels</h2>
-        <div class="newChannelForm"><input id="newChannelInput" placeholder="New Channel" /><button id="newChannelBtn">Create</button></div>
-        <div class="channel-current">General</div>
+        <div class="channel currentChannel"># general</div>
+        <div class="newChannelForm">
+          <input id="newChannelInput" placeholder="New Channel Name" />
+          <button id="newChannelBtn"><i class="fas fa-plus"></i></button>
+        </div>
     </div>
-    <h2>Online Users</h2>
-    <div class="usersOnline"></div>
+    <div class="usersOnlineContainer">
+      <h2 class="usersOnlineTitle">Online Users</h2>
+      <div class="usersOnline"></div>
+    </div>
+    
   </div>
-  <div class="chatContainer">
-    <div class="chatContainerFluid">
+  <div class="rightPane">
+    <div class="rightPaneFluid">
       <div class="messageContainer">
           <h2>Messages</h2>
       </div>
