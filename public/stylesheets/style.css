@@ -101,15 +101,16 @@ a {
 }
 
 #newChannelInput {
-  font-size: 14px;
+  font-size: 0.75em;
   padding: 0.5em;
   width: 80%;
 }
 
 #newChannelBtn {
-  font-size: 14px;
+  font-size: 0.75em;
   padding: 0.5em;
   width: 20%;
+  min-width: 25px;
 }
 
 .channel {
@@ -230,6 +231,10 @@ label {
   flex-direction: column;
 }
 
+.messagesTitle {
+  color: var(--dark-grey);
+}
+
 .message {
   margin-bottom: 0.3em;
 }
@@ -264,7 +269,7 @@ label {
   left: 1% !important;
 }
 
-.rightPaneMaximized {
+.maximizedRightPane {
   width: 97% !important;
 }
 
@@ -279,7 +284,7 @@ label {
   }
 
   .collapse-btn {
-    left: 28%;
+    left: 27%;
   }
 
   .rightPane {

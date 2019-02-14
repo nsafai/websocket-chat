@@ -10,6 +10,7 @@ $(document).ready(() => {
     // e.preventDefault();
     // $
     // document.getElementById('leftPane').classList.toggle('hiddenLeftPane');
+    $('#rightPane').toggleClass('maximizedRightPane');
     $('#leftPane').toggleClass('hiddenLeftPane');
     $('#leftPane').children().toggleClass('hidden');
     $('#collapse-btn').toggleClass('hiddenCollapseBtn');
