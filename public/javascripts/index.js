@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
 
 
@@ -61,6 +63,14 @@ $(document).ready(() => {
     console.log('inside get online users client side');
     for (username in onlineUsers) {
       $('.usersOnline').empty();
+      $('.usersOnline').append(`<p class="userOnline">${username}</p>`);
+    }
+  });
+
+  // Refresh the online user list
+  socket.on('user has left', (onlineUsers) => {
+    $('.usersOnline').empty();
+    for (username in onlineUsers) {
       $('.usersOnline').append(`<p class="userOnline">${username}</p>`);
     }
   });
