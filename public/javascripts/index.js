@@ -1,26 +1,24 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
-$('#collapse-btn').click(() => {
-  // document.getElementById('leftPane').classList.toggle("hiddenLeftPane");
-});
 
 $(document).ready(() => {
-  $('#collapse-btn').click((e) => {
-    // e.preventDefault();
-    // $
-    // document.getElementById('leftPane').classList.toggle('hiddenLeftPane');
+  $('#collapse-btn').click(() => {
     $('#rightPane').toggleClass('maximizedRightPane');
     $('#leftPane').toggleClass('hiddenLeftPane');
     $('#leftPane').children().toggleClass('hidden');
     $('#collapse-btn').toggleClass('hiddenCollapseBtn');
-    // $('#leftPane').children.toggle();
   });
+
+  /********************
+   *  SOCKET.IO BTNS  *
+   ********************/
+
   // Connect to the socket.io server
   const socket = io.connect();
-  // Keep track of the current user
-  // let currentUser;
 
+  // Sign up / enter chat
   $('#createUserBtn').click((e) => {
     e.preventDefault();
     currentUser = $('#usernameInput').val();
@@ -29,12 +27,23 @@ $(document).ready(() => {
       socket.emit('get online users');
       // Emit to the server the new user
       socket.emit('new user', currentUser);
-      $('.usernameForm').remove();
+      $('.usernameForm').toggleClass('hidden');
       // Have the main page visible
       $('.mainContainer').css('display', 'flex');
     }
   });
 
+  // Log out
+  $('#logoutBtn').click(() => {
+    console.log('trying to logout');
+    socket.emit('log out', currentUser);
+    $('.usernameForm').toggleClass('hidden');
+    $('.mainContainer').css('display', 'none');
+    // $('.mainContainer').toggleClass('hidden');
+    // Client.emit('disconnect');
+  });
+
+  // Send message
   $('#sendChatBtn').click((e) => {
     e.preventDefault();
     // Get the message text value
@@ -52,14 +61,18 @@ $(document).ready(() => {
     }
   });
 
-  // socket listeners
+  /*************************
+   *  SOCKET.IO LISTENERS  *
+   *************************/
+
+  //  new user has entered
   socket.on('new user', (username) => {
     console.log(`✋ ${username} has joined the chat! ✋`);
     // Add the new user to the online users div
     $('.usersOnline').append(`<p class="userOnline">${username}</p>`);
   });
 
-  // Output the new message
+  // New Message Received
   socket.on('new message', (data) => {
     $('.messageContainer').append(`
       <div class="message">

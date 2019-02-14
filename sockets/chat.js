@@ -18,6 +18,12 @@ module.exports = (io, socket, onlineUsers) => {
     io.emit('new user', username);
   });
 
+  // Listen for log out request
+  socket.on('log out', (username) => {
+    console.log(`${username} is trying to log out.`);
+    socket.disconnect();
+  });
+
   // Listen for new messages
   socket.on('new message', (data) => {
     // Send that data back to ALL clients
@@ -34,6 +40,7 @@ module.exports = (io, socket, onlineUsers) => {
 
   // This fires when a user closes out of the application
   socket.on('disconnect', () => {
+    console.log(socket.username, 'has disconnected');
     // This deletes the user by using the username we saved to the socket
     delete onlineUsers[socket.username];
     io.emit('user has left', onlineUsers);

@@ -1,6 +1,7 @@
 :root {
   /* https://flatuicolors.com/palette/in */
   --pink: #ae77c1;
+  --mid-grey: #96a4b0;
   --dark-grey: #2C3A47;
   --purple: #82589F;
   --red: #FC427B;
@@ -109,6 +110,8 @@ a {
   font-size: 0.75em;
   padding: 0.5em;
   width: 80%;
+  border: solid 1px var(--mid-grey);
+  background-color: var(--dark-grey);
 }
 
 #newChannelBtn {
@@ -139,10 +142,21 @@ a {
 
 .brand {
   padding: 0 0.5em 0 0.5em;
+  margin-bottom: 0.4em;
+}
+
+.logoutBtn {
+  color: var(--mid-grey);
+  padding: 0 0.5em 0 1em;
+  margin:0;
+}
+
+.logoutBtn:hover {
+  cursor: pointer;
 }
 
 .channelsLabel {
-  padding: 0 0.5em 0 0.5em;
+  padding: 0 0.5em 0 0.62em;
   margin-bottom: 0.5em;
 }
 
