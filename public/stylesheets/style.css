@@ -38,6 +38,10 @@ a {
   color: var(--purple);
 }
 
+.hidden {
+  display:none;
+}
+
 .pageTitle {
   margin-top: 30vh;
   font-size: 3em;
@@ -99,13 +103,13 @@ a {
 #newChannelInput {
   font-size: 14px;
   padding: 0.5em;
-  width: 70%;
+  width: 80%;
 }
 
 #newChannelBtn {
   font-size: 14px;
   padding: 0.5em;
-  width: 30%;
+  width: 20%;
 }
 
 .channel {
@@ -150,6 +154,8 @@ a {
   flex-direction: column;
 }
 
+
+
 .leftPane {
   width: 20%;
   /* min-width: 230px; */
@@ -158,6 +164,15 @@ a {
   flex-direction: column;
   background-color: var(--dark-grey);
   color: var(--off-white);
+}
+
+.collapse-btn {
+  position: absolute;
+  left: 18%;
+  /* top: 1em; */
+  color: white;
+  cursor: pointer;
+  padding: 1em 1em 1em 0;
 }
 
 .usersOnlineContainer {
@@ -236,6 +251,24 @@ label {
   height: 100%;
 }
 
+/* HIDDEN LEFT PANE */
+.hidden {
+  display: none;
+}
+
+.hiddenLeftPane { /* KEEP THIS AFTER LEFTPANE */
+  width: 3% !important;
+}
+
+.hiddenCollapseBtn {
+  left: 1% !important;
+}
+
+.rightPaneMaximized {
+  width: 97% !important;
+}
+
+/* SMALL DESKTOP AND BELOW */
 @media screen and (max-width: 991px) {
   body {
     font-size: 16px;
@@ -245,11 +278,17 @@ label {
     width: 30%;
   }
 
+  .collapse-btn {
+    left: 28%;
+  }
+
   .rightPane {
     width: 70%;
   }
+  
 }
 
+/* TABLET AND BELOW */
 @media screen and (max-width: 768px) {
   body {
     font-size: 14px;

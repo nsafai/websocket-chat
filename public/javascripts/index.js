@@ -1,9 +1,20 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
-
+$('#collapse-btn').click(() => {
+  // document.getElementById('leftPane').classList.toggle("hiddenLeftPane");
+});
 
 $(document).ready(() => {
+  $('#collapse-btn').click((e) => {
+    // e.preventDefault();
+    // $
+    // document.getElementById('leftPane').classList.toggle('hiddenLeftPane');
+    $('#leftPane').toggleClass('hiddenLeftPane');
+    $('#leftPane').children().toggleClass('hidden');
+    $('#collapse-btn').toggleClass('hiddenCollapseBtn');
+    // $('#leftPane').children.toggle();
+  });
   // Connect to the socket.io server
   const socket = io.connect();
   // Keep track of the current user
