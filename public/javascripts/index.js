@@ -4,6 +4,7 @@
 /* eslint-disable no-undef */
 
 $(document).ready(() => {
+  // Hide left pane
   $('#collapse-btn').click(() => {
     $('#rightPane').toggleClass('maximizedRightPane');
     $('#leftPane').toggleClass('hiddenLeftPane');
@@ -17,6 +18,7 @@ $(document).ready(() => {
 
   // Connect to the socket.io server
   const socket = io.connect();
+  let currentUser;
 
   // Sign up / enter chat
   $('#createUserBtn').click((e) => {
@@ -25,6 +27,8 @@ $(document).ready(() => {
     if (currentUser.length > 0) {
       // Get the online users from the server
       socket.emit('get online users');
+      // Each user should be in the general channel by default.
+      socket.emit('user changed channel', 'general');
       // Emit to the server the new user
       socket.emit('new user', currentUser);
       $('.usernameForm').toggleClass('hidden');
@@ -43,11 +47,10 @@ $(document).ready(() => {
     // Client.emit('disconnect');
   });
 
-  // Send message
-  $('#sendChatBtn').click((e) => {
+  function sendMessage(e) {
     e.preventDefault();
     // Get the client's channel
-    const channel = $('.channel-current').text();
+    const channel = $('.currentChannel').text();
     // Get the message text value
     const message = $('#chatInput').val();
     // Make sure it's not empty
@@ -61,6 +64,19 @@ $(document).ready(() => {
       });
       $('#chatInput').val('');
     }
+  }
+
+  // Send message if press enter button
+  $('#chatInput').on('keyup', (e) => {
+    // do not submit if holding shift key down, user probably intending for new line
+    if (e.keyCode === 13 && !e.shiftKey) {
+      sendMessage(e);
+    }
+  });
+
+  // Send message if click "send message button"
+  $('#sendChatBtn').click((e) => {
+    sendMessage(e);
   });
 
   // Create new channel
@@ -71,6 +87,15 @@ $(document).ready(() => {
       // Emit the new channel to the server
       socket.emit('new channel', newChannel);
       $('#newChannelInput').val('');
+    }
+  });
+
+  //Users can change the channel by clicking on its name.
+  $(document).on('click', '.channel', (e) => {
+    const newChannel = e.target.textContent;
+    const currentChannel = $('.currentChannel').text();
+    if (currentChannel !== newChannel) {
+      socket.emit('user changed channel', newChannel);
     }
   });
 
@@ -87,7 +112,7 @@ $(document).ready(() => {
 
   // Add the new channel to the channels list (Fires for all clients)
   socket.on('new channel', (newChannel) => {
-    $('.listOfChannels').prepend(`<div class="channel"># ${newChannel}</div>`);
+    $('.listOfChannels').prepend(`<div class="channel">${newChannel}</div>`);
   });
 
   // Make the channel joined the current channel. Then load the messages.
@@ -110,7 +135,7 @@ $(document).ready(() => {
   // New Message Received
   socket.on('new message', (data) => {
     const currentChannel = $('.currentChannel').text();
-    if (currentChannel == data.channel) {
+    if (currentChannel === data.channel) {
       $('.messageContainer').append(`
         <div class="message">
           <p class="messageUser">${data.sender}: </p>

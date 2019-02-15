@@ -33,7 +33,7 @@ module.exports = (io, socket, onlineUsers, channels) => {
     });
     // Emit only to sockets that are in that channel room.
     io.to(data.channel).emit('new message', data);
-    console.log(`🎤 ${data.sender}: ${data.message} in ${data.channel} 🎤`);
+    console.log(`🎤 ${data.sender}: ${data.message} in #${data.channel} 🎤`);
   });
 
   socket.on('get online users', () => {
@@ -65,5 +65,16 @@ module.exports = (io, socket, onlineUsers, channels) => {
       channel: newChannel,
       messages: channels[newChannel],
     });
+  });
+
+  // Have the socket join the room of the channel
+  socket.on('user changed channel', (newChannel) => {
+    socket.join(newChannel);
+    console.log('user trying to join', newChannel);
+    socket.emit('user changed channel', {
+      channel: newChannel,
+      messages: channels[newChannel],
+    });
+    console.log('user changed channels to', newChannel);
   });
 };

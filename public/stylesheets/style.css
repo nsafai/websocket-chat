@@ -287,7 +287,7 @@ label {
 }
 
 .hiddenCollapseBtn {
-  left: 1% !important;
+  left: 1.25% !important;
 }
 
 .maximizedRightPane {
@@ -308,6 +308,10 @@ label {
     left: 27%;
   }
 
+  .hiddenCollapseBtn {
+    left: 1.1% !important;
+  }
+
   .rightPane {
     width: 70%;
   }
@@ -318,5 +322,12 @@ label {
 @media screen and (max-width: 768px) {
   body {
     font-size: 14px;
+  }
+}
+
+/* PHONES */
+@media screen and (max-width: 400px) {
+  .hiddenCollapseBtn {
+    left: 0.8% !important;
   }
 }
