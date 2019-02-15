@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 let onlineUsers = {};
 // Save the channels in this object.
-let channels = { 'general' : [] };
+let channels = { general: [] };
 
 // Socket.io
 let io = require('socket.io').listen(server);
