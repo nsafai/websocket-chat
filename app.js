@@ -25,7 +25,6 @@ io.on('connection', (socket) => {
 
 // Express View Engine for Handlebars
 const exphbs = require('express-handlebars');
-const usersRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 
 app.engine('handlebars', exphbs());
@@ -38,7 +37,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
