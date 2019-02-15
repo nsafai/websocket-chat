@@ -7,7 +7,7 @@ This single page web app is a chat client. It is a learning project as part of M
 - [x] I can join / create chat channels.
 - [x] I will never have to refresh the page to receive new messages.
 - [x] Polish the web app
-- [ ] Ship to Heroku
+- [x] Ship to Heroku [How to](https://medium.com/@nicolaisafai/how-to-deploy-your-node-js-mongodb-app-to-the-web-using-heroku-63d4bccf2675)
 
 ## Ideas for enhancements
 - Implementing a private message system.
