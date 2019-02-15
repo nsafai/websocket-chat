@@ -9,6 +9,9 @@ This single page web app is a chat client. It is a learning project as part of M
 - [x] Polish the web app
 - [x] Ship to Heroku [How to](https://medium.com/@nicolaisafai/how-to-deploy-your-node-js-mongodb-app-to-the-web-using-heroku-63d4bccf2675)
 
+## Screenshot
+![Screenshot of Lime Chat v1](/lime-chat-screenshot.png)
+
 ## Ideas for enhancements
 - Implementing a private message system.
 - Using Socket.io's "channels" for multiple make chat teams to exist
