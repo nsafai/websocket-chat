@@ -1,6 +1,20 @@
 # Web Chat client using socket.io
 This single page web app is a chat client. It is a learning project as part of Make School's BEW 2.1 Advanced Web Patterns class, inspired from [this tutorial](https://www.makeschool.com/academy/track/standalone/make-chat/)
 
+## How to try
+Try the app at http://lime-chat.herokuapp.com
+
+## Screenshot
+![Screenshot of Lime Chat v1](/lime-chat-screenshot.png)
+
+## How to install locally
+- Clone this repo
+- Install node package manager
+- `cd` to project repo in your Terminal
+- Run `npm install` to install dependencies
+- Run `npm start` to run the app
+- See the app at `http://localhost:3000` in your browser
+
 ## Milestones
 - [x] Upon entering the application, I can choose a username to go by.
 - [x] I can enter a message that shows up on all clients.
@@ -8,9 +22,6 @@ This single page web app is a chat client. It is a learning project as part of M
 - [x] I will never have to refresh the page to receive new messages.
 - [x] Polish the web app
 - [x] Ship to Heroku [How to](https://medium.com/@nicolaisafai/how-to-deploy-your-node-js-mongodb-app-to-the-web-using-heroku-63d4bccf2675)
-
-## Screenshot
-![Screenshot of Lime Chat v1](/lime-chat-screenshot.png)
 
 ## Ideas for enhancements
 - Implementing a private message system.
